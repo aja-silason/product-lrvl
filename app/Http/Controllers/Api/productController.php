@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class productController extends Controller
 {
-    public function getAll(){
+    public function findAll(){
 
         $products = Product::all();
 
@@ -64,6 +64,20 @@ class productController extends Controller
         }
 
         response()->json(201);
-        
     } 
+
+    public function findOne($id){
+
+        $product = Product::find($id);
+
+        if(!$product) {
+            $data = [
+                'message' => 'product not found',
+                'status' => 404,
+            ];
+
+            return response()->json($data, 404);
+        }
+        return response()->json($product, 200);
+    }
 }

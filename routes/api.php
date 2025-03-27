@@ -5,13 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\productController;
 
-Route::get("product", [productController::class, 'getAll']);
+Route::get("product", [productController::class, 'findAll']);
 
 Route::post("product", [productController::class, 'create']);
 
-Route::get("product/{id}", function(){
-    return "Show one products";
-});
+Route::get("product/{id}", [productController::class, 'findOne']);
 
 Route::put("product/{id}", function(){
     return "Updating products";
