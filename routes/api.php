@@ -3,9 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get("product", function (){
-    return "Product list";
-});
+use App\Http\Controllers\Api\productController;
+
+Route::get("product", [productController::class, 'getAll']);
 
 Route::get("product/{id}", function(){
     return "Show one products";
