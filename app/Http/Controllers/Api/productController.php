@@ -81,7 +81,7 @@ class productController extends Controller
         return response()->json($product, 200);
     }
 
-    public function update($id){
+    public function delete($id){
 
         $product = Product::find($id);
 
@@ -94,7 +94,7 @@ class productController extends Controller
             return response()->json($product, 404);
         }
 
-        return response()->json($product, 201);
+        return response()->json($product, 204);
 
     }
 }
