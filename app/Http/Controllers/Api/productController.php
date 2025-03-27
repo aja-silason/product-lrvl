@@ -170,16 +170,16 @@ class productController extends Controller
             return response()->json($data, 400);
         }
 
-        if($product->has('product')){
-            $product->$product = $request->product;
+        if($request->has('product')){
+            $product->product = $request->product;
         }
 
-        if($product->has('price')){
-            $product->$price = $request->price;
+        if($request->has('price')){
+            $product->price = $request->price;
         }
 
-        if($product->has('description')){
-            $product->$description = $request->description;
+        if($request->has('description')){
+            $product->description = $request->description;
         }
         
         $product->save();
