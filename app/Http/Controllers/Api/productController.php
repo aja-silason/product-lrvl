@@ -80,4 +80,21 @@ class productController extends Controller
         }
         return response()->json($product, 200);
     }
+
+    public function update($id){
+
+        $product = Product::find($id);
+
+        if(!$product){
+            $data = [
+                'message' => 'product not found',
+                'status' => 404
+            ];
+
+            return response()->json($product, 404);
+        }
+
+        return response()->json($product, 201);
+
+    }
 }

@@ -11,9 +11,7 @@ Route::post("product", [productController::class, 'create']);
 
 Route::get("product/{id}", [productController::class, 'findOne']);
 
-Route::put("product/{id}", function(){
-    return "Updating products";
-});
+Route::put("product/{id}", [productController::class, 'update']);
 
 Route::delete("product/{id}", function(){
     return "Delete product";
