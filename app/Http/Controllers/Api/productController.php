@@ -94,7 +94,97 @@ class productController extends Controller
             return response()->json($product, 404);
         }
 
-        return response()->json($product, 204);
+        $product->delete();
+
+        return response()->json('', 204);
+
+    }
+
+    public function update(Request $request, $id){
+        
+        $product = Product::find($id);
+
+        if(!$product){
+            $data = [
+                'message' => 'product not found',
+                'status' => 404
+            ];
+
+            return response()->json($product, 404);
+        }
+
+        $isValidate = Validator::make($request->all(), [
+            'product' => 'required | max:100',
+            'price' => 'required | integer',
+            'description' => 'required',
+        ]);
+
+        if($isValidate->fails()){
+            $data = [
+                'message' => 'validation require, check the datas',
+                'error' => $isValidate->errors(),
+                'status' => 400,
+            ];
+
+            return response()->json($data, 400);
+        }
+
+
+        
+        $product->product = $request->product;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        
+        $product->save();
+
+        return response()->json('', 204);
+
+    }
+
+    public function partialUpdate(Request $request, $id ){
+
+        $product = Product::find($id);
+
+        if(!$product){
+            $data = [
+                'message' => 'product not found',
+                'status' => 404
+            ];
+
+            return response()->json($product, 404);
+        }
+
+        $isValidate = Validator::make($request->all(), [
+            'product' => 'max:100',
+            'price' => 'integer',
+            'description' => 'string',
+        ]);
+
+        if($isValidate->fails()){
+            $data = [
+                'message' => 'validation require, check the datas',
+                'error' => $isValidate->errors(),
+                'status' => 400,
+            ];
+
+            return response()->json($data, 400);
+        }
+
+        if($product->has('product')){
+            $product->$product = $request->product;
+        }
+
+        if($product->has('price')){
+            $product->$price = $request->price;
+        }
+
+        if($product->has('description')){
+            $product->$description = $request->description;
+        }
+        
+        $product->save();
+
+        return response()->json('', 204);
 
     }
 }

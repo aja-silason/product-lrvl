@@ -7,16 +7,12 @@ use App\Http\Controllers\Api\productController;
 
 Route::get("product", [productController::class, 'findAll']);
 
-Route::post("product", [productController::class, 'create']);
-
 Route::get("product/{id}", [productController::class, 'findOne']);
+
+Route::post("product", [productController::class, 'create']);
 
 Route::put("product/{id}", [productController::class, 'update']);
 
-Route::delete("product/{id}", function(){
-    return "Delete product";
-});
+Route::patch("product/{id}", [productController::class, 'partialUpdate']);
 
-Route::patch("product/{id}", function(){
-    return "Updating product";
-});
+Route::delete("product/{id}", [productController::class, 'delete']);
